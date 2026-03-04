@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kz.misal.alc.ui.theme.ApplicationLayoutCource_36_3Theme
+import java.util.UUID
 
 @Composable
 fun Screen(modifier: Modifier = Modifier.Companion) {
@@ -92,6 +93,15 @@ fun OutputElement(strings: List<String>, modifier: Modifier = Modifier) {
     }
 }
 
+data class TodoItem(val task:String, val id: String = UUID.randomUUID().toString())
+
+@Composable
+fun Item(item: TodoItem){
+    Row(Modifier.fillMaxWidth()){
+        Text(item.task)
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
@@ -100,3 +110,4 @@ fun ScreenPreview() {
         Screen()
     }
 }
+

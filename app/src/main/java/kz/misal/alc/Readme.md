@@ -197,3 +197,36 @@ fun OutputElement(strings: List<String>, modifier: Modifier = Modifier) {
 ## Добавим кнопку "Выполнено" для удаления элемента из списка
 
 Теперь мы отображаем в списке на только строку, создадим отдельный компонент для элемента строки
+
+Но перед этим...
+
+```kotlin
+data class TodoItem(val task:String, val id: String = UUID.randomUUID().toString())
+```
+Создадим специальный класс, который позволит любой нашей задаче быть уникальной!
+
+```kotlin
+@Composable
+fun Item(item: TodoItem){
+    Row(Modifier.fillMaxWidth()){
+        Text(item.task)
+    }
+}
+```
+
+И компонентную функцию, которая наш элемент будет отображать!
+
+```kotlin
+@Composable
+fun Item(item: TodoItem){
+    Row(Modifier.fillMaxWidth()){
+        Text(item.task)
+    }
+}
+```
+
+Отлично, теперь можно вывести наш список!
+
+Задание: - измените код таким образом, чтобы вместо списка строк мы оперировали списком элементов типа TodoItem
+и измените OutputElement, чтобы он использовал компонентную функцию Item для вывода списка TodoItem
+
