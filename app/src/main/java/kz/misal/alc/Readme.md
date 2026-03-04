@@ -109,3 +109,62 @@ fun OutputElement(text: String, modifier: Modifier = Modifier) {
 ```
 
 >   Найдите новые для себя элементы, разберитесь, как они используются
+
+## Добавим полноценный список!!
+
+- Изменим элементы вывода
+
+```kotlin
+@Composable
+//fun OutputElement(text: String, modifier: Modifier = Modifier) {
+//    Box(modifier) {
+//        Text(text = text)
+//    }
+//}
+fun OutputElement(strings: List<String>, modifier: Modifier = Modifier) {
+    Column() {
+        strings.forEach { string ->
+            Text(string)
+        }
+    }
+}
+```
+
+- Изменим экран
+```kotlin
+@Composable
+fun Screen(modifier: Modifier = Modifier.Companion) {
+//    var text by remember { mutableStateOf("") }
+    val strings = remember { mutableStateListOf<String>() }
+
+    Column(
+        modifier = modifier
+            .padding(horizontal = 16.dp)
+            .background(Color.Yellow),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+//        InputElement(modifier = Modifier.fillMaxWidth()) { text = it }
+//        OutputElement(text, Modifier.fillMaxWidth())
+        OutputElement(strings, Modifier.fillMaxWidth())
+        InputElement(modifier = Modifier.fillMaxWidth()) { strings.add(it) }
+    }
+}
+```
+
+> Ой, у нас нарушился порядок элементов!  
+> 
+> И, надо бы очищать состояние `inputText` после каждого нажатия кнопки `ADD`!  
+> 
+> Сделайте это!
+>
+> 
+
+## Правильный список!
+
+Проблема нашего кода в том, что если список буде длинным, а элементы списка - сложными для обрисовки, мы получим большие задержки про скроллинге списка.
+
+Скроллинг, мы его не добавили!!! Добавим!
+
+```kotlin
+
+```

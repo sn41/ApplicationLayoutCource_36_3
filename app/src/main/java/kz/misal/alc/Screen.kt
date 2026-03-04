@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -31,14 +32,19 @@ import kz.misal.alc.ui.theme.ApplicationLayoutCource_36_3Theme
 
 @Composable
 fun Screen(modifier: Modifier = Modifier.Companion) {
-    var text by remember { mutableStateOf("") }
+//    var text by remember { mutableStateOf("") }
+    val strings = remember { mutableStateListOf<String>() }
 
     Column(
-        modifier = modifier.padding(horizontal = 16.dp).background(Color.Yellow),
+        modifier = modifier
+            .padding(horizontal = 16.dp)
+            .background(Color.Yellow),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        InputElement(modifier = Modifier.fillMaxWidth()) { text = it }
-        OutputElement(text, Modifier.fillMaxWidth())
+//        InputElement(modifier = Modifier.fillMaxWidth()) { text = it }
+//        OutputElement(text, Modifier.fillMaxWidth())
+        OutputElement(strings, Modifier.fillMaxWidth())
+        InputElement(modifier = Modifier.fillMaxWidth()) { strings.add(it) }
     }
 }
 
@@ -68,9 +74,16 @@ fun InputElement(modifier: Modifier = Modifier, addText: (String) -> Unit) {
 }
 
 @Composable
-fun OutputElement(text: String, modifier: Modifier = Modifier) {
-    Box(modifier) {
-        Text(text = text)
+//fun OutputElement(text: String, modifier: Modifier = Modifier) {
+//    Box(modifier) {
+//        Text(text = text)
+//    }
+//}
+fun OutputElement(strings: List<String>, modifier: Modifier = Modifier) {
+    Column() {
+        strings.forEach { string ->
+            Text(string)
+        }
     }
 }
 
