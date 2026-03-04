@@ -166,5 +166,34 @@ fun Screen(modifier: Modifier = Modifier.Companion) {
 Скроллинг, мы его не добавили!!! Добавим!
 
 ```kotlin
-
+fun OutputElement(strings: List<String>, modifier: Modifier = Modifier) {
+    val scrollState = rememberScrollState()
+    Column(modifier.horizontalScroll(scrollState)) {
+        strings.forEach { string ->
+            Text(string)
+        }
+    }
+}
 ```
+
+Ну вот!
+
+Так вот, чтобы не держать в памяти  все отображения элементов списка, используют
+
+LazyCulumn - он создаёт столько элементов, сколько помещается на экране и когда элемент выходит за его пределы при скроллинге, этот элемент используется повторно.
+
+А еще он умеет скроллить, анимировать, в общем хорошая штука.
+
+```kotlin
+fun OutputElement(strings: List<String>, modifier: Modifier = Modifier) {
+    LazyColumn(modifier) {
+        items(strings) { string ->
+            Text(string)
+        }
+    }
+}
+```
+
+## Добавим кнопку "Выполнено" для удаления элемента из списка
+
+Теперь мы отображаем в списке на только строку, создадим отдельный компонент для элемента строки
